@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://LoonyLips.gd" type="Script" id=1]
+[ext_resource path="res://gfx/blackboard.jpg" type="Texture" id=2]
+[ext_resource path="res://gfx/Feltpen.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://gfx/blue_button12.png" type="Texture" id=4]
+[ext_resource path="res://gfx/blue_button11.png" type="Texture" id=5]
+[ext_resource path="res://story.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 3 )
+
+[node name="LoonyLips" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.29236
+margin_top = 1.29236
+margin_right = -1.29236
+margin_bottom = 1.29236
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = -12.312
+margin_bottom = -12.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DisplayText" type="Label" parent="VBoxContainer"]
+margin_top = 99.0
+margin_right = 999.0
+margin_bottom = 499.0
+rect_min_size = Vector2( 0, 400 )
+custom_fonts/font = SubResource( 1 )
+text = "Place holder from UI"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 503.0
+margin_right = 999.0
+margin_bottom = 576.0
+custom_constants/separation = 12
+alignment = 2
+
+[node name="PlayerText" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+margin_right = 833.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 845.0
+margin_right = 918.0
+margin_bottom = 73.0
+rect_min_size = Vector2( 73, 73 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 930.0
+margin_top = 5.0
+margin_right = 999.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 3 )
+text = "OK"
+
+[node name="StoryBook" type="Node" parent="."]
+
+[node name="story0" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+prompts = PoolStringArray( "a name", "a thing", "a feeling", "another feeling", "some things" )
+story = "Once upon a time a %s ate a %s and felt very %s. It was a %s day for all good %s."
+
+[node name="story1" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+prompts = PoolStringArray( "a thing", "a name", " description word (an adjective)", "a thing" )
+story = "There once was %s called %s that lived as %s as a %s."
+
+[node name="story2" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+prompts = PoolStringArray( "a noun (a thing)", "an adjective (a description word)", "a person\'s name", "a place", "a verb", "a second person\'s name", "another person\'s name" )
+story = "A poem.     I wish I was a %s, %s as can be, Then you could call me %s, And I would finally be free.      Then I would visit %s \\nAnd %s all day long,And I would call you %s,And teach %s my song"
+
+[node name="story3" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+prompts = PoolStringArray( "a person\'s name", "the name of a place", "the plural of a noun (there\'s going to be more than one of these)", "an adverb (a word ending in -ly)", "a noun" )
+story = "Dear %s,  I hope this letter finds you well.  I have spent the past three weeks in %s researching the history of %s for my new book.  I miss you %s, and whenever I see a %s I think of you."
+
+[node name="story4" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+prompts = PoolStringArray( "an adjective", "a person\'s name", "a place", "an adjective", "a noun", "another place", "an adverb (a word ending in -ly)" )
+story = "Once upon a time, a %s hero called %s was sent to %s, to defeat a %s %s.  He did so, returned home to %s and lived %s ever after"
+
+[node name="story5" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+prompts = PoolStringArray( "a noun", "an adjective (a description word)", "another noun", "yet another noun", "an adjective", "one more noun", "a verb" )
+story = "The ultimate pizza recipe.      Mix one packet of %s with three spoonfuls of flour.  Knead the dough for 3 minutes until %s.  Roll the dough flat on a %s and sprinkle one pinch of %s and three cups of %s %s.  Bake for 17 minutes at a high heat, then remove from the oven and %s!"
+[connection signal="text_entered" from="VBoxContainer/HBoxContainer/PlayerText" to="." method="_on_PlayerText_text_entered"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
